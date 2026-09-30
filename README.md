@@ -1,37 +1,27 @@
-# wavekol-script-score
+# 直播话术评分
 
-**直播话术评分** —— 按 7 个维度给话术打分 + 逐条查合规红线 + 评退款率风险 + 判断能不能上播
+从结构、卖点、口吻、合规风险、退款风险、算账和可念性七个维度评审话术，给出问题原句、可直接替换的写法和上播建议。
 
-让 AI agent（DSH / Codex / Claude Code 等）使用。
-
-## 解决什么问题
-
-之前话术写完没人把关，合规风险靠经验判断，容易踩红线。
-
-现在任意话术（生成器出的、带货者写的、同行抄来的都行）按 7 个维度打分，逐条查合规红线，评退款率风险，给出具体改进并明确判断**能不能上播**。
-
-## 前置依赖
-
-无需额外依赖，直接可用。
-
-## 安装
+## 安装与使用
 
 ```bash
-git clone https://github.com/DaJunn/wavekol-script-score.git \
-  ~/.agents/skills/wavekol-script-score
+git clone https://github.com/DaJunn/wavekol-script-score.git ~/.agents/skills/wavekol-script-score
 ```
 
-## 触发方式
+对 AI 说：「给这段话术评分，列出必须修改的句子。」提供话术和已有的商品、促销材料即可；完整稿按 70 分评分，局部段落只评适用维度。
 
-对 agent 说：「评分这段话术」「这话术行不行」「话术体检」「帮我改改这段话术」「对标金标准看看差在哪」「话术合规吗」。
+## 本地扫描
 
+需要 Node.js，无第三方依赖。在技能目录运行：
 
-## 说明
+```bash
+node scripts/scan-compliance.mjs /path/to/script.txt
+```
 
-- 合规是命门，红线逐条查
-- 统一称「带货者」，不写「主播」「达人」
+扫描结果是关键词提示，需结合上下文、品类及事实证据判断；零命中不代表通过合规审核。没有 Node.js 也可做人工逐句评审，但应说明未做自动扫描。
 
-## 相关
+## 输出与边界
 
-- 完整技能合集见飞书文档《AI减负视频号运营技能合集》
-- 更多 skill：https://github.com/DaJunn
+输出评分、风险、退款风险和替换句。缺少规格、个人体验或优惠依据时标为待核实，不替带货者编造事实，也不替运营安排上播。
+
+完整评分口径见 [SKILL.md](SKILL.md)。更多技能见 [DaJunn](https://github.com/DaJunn)。
